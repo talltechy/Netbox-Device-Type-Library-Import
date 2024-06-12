@@ -85,7 +85,7 @@ class DTLRepo:
     def parse_files(self, files: list, slugs: list = None):
         deviceTypes = []
         for file in files:
-            with open(file, 'r') as stream:
+            with open(file, 'r',encoding="utf8") as stream:
                 try:
                     data = yaml.safe_load(stream)
                 except yaml.YAMLError as excep:
