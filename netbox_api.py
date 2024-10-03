@@ -28,7 +28,7 @@ class NetBox:
         self.connect_api()
         self.verify_compatibility()
         self.existing_manufacturers = self.get_manufacturers()
-        self.device_types = DeviceTypes(self.netbox, self.handle, self.counter, self.ignore_ssl)
+        self.device_types = DeviceTypes(self.netbox, self.handle, self.counter, self.ignore_ssl, self.new_filters)
 
     def connect_api(self):
         try:
@@ -189,12 +189,13 @@ class DeviceTypes:
     def __new__(cls, *args, **kwargs):
         return super().__new__(cls)
 
-    def __init__(self, netbox, handle, counter, ignore_ssl):
+    def __init__(self, netbox, handle, counter, ignore_ssl, new_filters):
         self.netbox = netbox
         self.handle = handle
         self.counter = counter
         self.existing_device_types = self.get_device_types()
         self.ignore_ssl = ignore_ssl
+        self.new_filters = new_filters
 
     def get_device_types(self):
         return {str(item): item for item in self.netbox.dcim.device_types.all()}
