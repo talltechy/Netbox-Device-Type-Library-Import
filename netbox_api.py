@@ -58,6 +58,7 @@ class NetBox:
         # check if version >= 4.1 in order to use new filter names
         if version_split[0] >= 4 and version_split[1] >= 1:
             self.new_filters = True
+            self.handle.log(f'Netbox version {self.netbox.version} found. Using new filters.')
     
     def get_manufacturers(self):
         return {str(item): item for item in self.netbox.dcim.manufacturers.all()}
