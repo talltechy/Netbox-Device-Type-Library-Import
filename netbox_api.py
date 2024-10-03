@@ -207,10 +207,10 @@ class DeviceTypes:
         return {str(item): item for item in self.netbox.dcim.rear_port_templates.filter(**{'device_type_id' if self.new_filters else 'devicetype_id': device_type})}
 
     def get_module_power_ports(self, module_type):
-        return {str(item): item for item in self.netbox.dcim.power_port_templates.filter(module_type_id=module_type)}
+        return {str(item): item for item in self.netbox.dcim.power_port_templates.filter(**{'module_type_id' if self.new_filters else 'moduletype_id': module_type})}
 
     def get_module_rear_ports(self, module_type):
-        return {str(item): item for item in self.netbox.dcim.rear_port_templates.filter(module_type_id=module_type)}
+        return {str(item): item for item in self.netbox.dcim.rear_port_templates.filter(**{'module_type_id' if self.new_filters else 'moduletype_id': module_type})}
 
     def get_device_type_ports_to_create(self, dcim_ports, device_type, existing_ports):
         to_create = [port for port in dcim_ports if port['name'] not in existing_ports]
@@ -363,7 +363,7 @@ class DeviceTypes:
                 self.handle.log(f"Error '{excep.error}' creating Module Bay")
 
     def create_module_interfaces(self, module_interfaces, module_type):
-        existing_interfaces = {str(item): item for item in self.netbox.dcim.interface_templates.filter(module_type_id=module_type)}
+        existing_interfaces = {str(item): item for item in self.netbox.dcim.interface_templates.filter(**{'module_type_id' if self.new_filters else 'moduletype_id': module_type})}
         to_create = self.get_module_type_ports_to_create(module_interfaces, module_type, existing_interfaces)
 
         if to_create:
@@ -389,7 +389,7 @@ class DeviceTypes:
                 self.handle.log(f"Error '{excep.error}' creating Module Power Port")
 
     def create_module_console_ports(self, console_ports, module_type):
-        existing_console_ports = {str(item): item for item in self.netbox.dcim.console_port_templates.filter(module_type_id=module_type)}
+        existing_console_ports = {str(item): item for item in self.netbox.dcim.console_port_templates.filter(**{'module_type_id' if self.new_filters else 'moduletype_id': module_type})}
         to_create = self.get_module_type_ports_to_create(console_ports, module_type, existing_console_ports)
 
         if to_create:
@@ -402,7 +402,7 @@ class DeviceTypes:
                 self.handle.log(f"Error '{excep.error}' creating Module Console Port")
 
     def create_module_power_outlets(self, power_outlets, module_type):
-        existing_power_outlets = {str(item): item for item in self.netbox.dcim.power_outlet_templates.filter(module_type_id=module_type)}
+        existing_power_outlets = {str(item): item for item in self.netbox.dcim.power_outlet_templates.filter(**{'module_type_id' if self.new_filters else 'moduletype_id': module_type})}
         to_create = self.get_module_type_ports_to_create(power_outlets, module_type, existing_power_outlets)
 
         if to_create:
@@ -423,7 +423,7 @@ class DeviceTypes:
                 self.handle.log(f"Error '{excep.error}' creating Module Power Outlet")
 
     def create_module_console_server_ports(self, console_server_ports, module_type):
-        existing_console_server_ports = {str(item): item for item in self.netbox.dcim.console_server_port_templates.filter(module_type_id=module_type)}
+        existing_console_server_ports = {str(item): item for item in self.netbox.dcim.console_server_port_templates.filter(**{'module_type_id' if self.new_filters else 'moduletype_id': module_type})}
         to_create = self.get_module_type_ports_to_create(console_server_ports, module_type, existing_console_server_ports)
 
         if to_create:
@@ -449,7 +449,7 @@ class DeviceTypes:
                 self.handle.log(f"Error '{excep.error}' creating Module Rear Port")
 
     def create_module_front_ports(self, front_ports, module_type):
-        existing_front_ports = {str(item): item for item in self.netbox.dcim.front_port_templates.filter(module_type_id=module_type)}
+        existing_front_ports = {str(item): item for item in self.netbox.dcim.front_port_templates.filter(**{'module_type_id' if self.new_filters else 'moduletype_id': module_type})}
         to_create = self.get_module_type_ports_to_create(front_ports, module_type, existing_front_ports)
 
         if to_create:
