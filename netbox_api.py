@@ -55,7 +55,7 @@ class NetBox:
         if version_split[0] > 3 or (version_split[0] == 3 and version_split[1] >= 2):
             self.modules = True
 
-        # check if version >= 4.1 in order to use new filter names
+        # check if version >= 4.1 in order to use new filter names (https://github.com/netbox-community/netbox/issues/15410)
         if version_split[0] >= 4 and version_split[1] >= 1:
             self.new_filters = True
             self.handle.log(f'Netbox version {self.netbox.version} found. Using new filters.')
